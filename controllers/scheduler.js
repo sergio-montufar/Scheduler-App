@@ -38,12 +38,11 @@ router.get("/new", (req, res) => {
     
     const dateOfToday = year + "-" + month + "-" + day;
 
-    currentHour, hourAboveCurrentHour += ":00"
+    // currentHour, hourAboveCurrentHour += ":00"
 
     res.render("new.ejs", {
         date: dateOfToday,
         hour: currentHour,
-        aboveHour: hourAboveCurrentHour
     })
 })
 
@@ -83,6 +82,18 @@ router.get("/:id", (req, res) => {
     })
 })
 
+
+// post route 
+router.post("/", (req, res) => {
+    Scheduler.create(req.body, (err, createdSchedule) => {
+        if (err) {
+            console.log(err, "- ERROR AT POST ROUTE")
+            res.send(err)
+        } else {
+            res.redirect("/scheduler")
+        }
+    })
+})
 
 
 // delete

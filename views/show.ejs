@@ -7,7 +7,21 @@
     <title>Scheduler Show Page</title>
 </head>
 <body>
-    <h1> <% schedule.name %></h1>
+    <h1>Scheduler Show Page!</h1>
+    <h2> Name Of Event: <%= schedule.name %></h2>
+    <nav>
+        <a href="/scheduler">
+            <button>Back to Home Page</button>
+        </a>
+    </nav>
+    <div>
+        <h4>The Event is on: <%= schedule.date%></h4>
+        <h4>It starts at: <%= schedule.first_time %>, and ends at: <%= schedule.second_time %></h4>
+        <% if (schedule.description) %>
+            <h4>
+                Description: <%= schedule.description %>
+            </h4>
+    </div>
     <form action="/scheduler/<%=schedule._id%>?_method=DELETE" method="POST">
         <input type="submit" value="Delete">
     </form>

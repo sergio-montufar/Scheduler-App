@@ -14,11 +14,11 @@
     <% for (let i = 0; i < schedules.length; i++) { %>
         <div class="container">
             <h3>Schedule: 
-                <a href="/scheduler/<% schedules[i]._id %>">
-                    <% schedules[i].name %>
+                <a href="/scheduler/<%=schedules[i]._id %>">
+                    <%= schedules[i].name %>
                 </a>
             </h3>
-            <h4>Date Of Event: <% schedules[i].date %></h4>
+            <h4>Date Of Event: <%= schedules[i].date %></h4>
         </div> 
     <% } %>
     <!-- <form action="/scheduler?_method=DELETE" method="POST">

@@ -12,11 +12,13 @@
         <label for="name">Name Of Event</label>
         <input type="text" name="name"> <br/>
         <label for="date">Choose a date</label>
-        <input type="date" name="date" value="<%=date%>"> <br/>
+        <input type="date" name="date" value="<%=date%>" min="2020-01-01" max="2030-12-31"> <br/>
         <label for="time">Choose First Time</label>
-        <input type="time" name="time" value="<%=hour%>"> <br/>
+        <input type="time" name="first_time" > <br/>
         <label for="time">Choose Second Time</label>
-        <input type="time" name="time" value="<%=aboveHour%>"> <br/>
+        <input type="time" name="second_time" > <br/>
+        <label for="description">Add A Description</label>
+        <input type="text" name="description" placeholder="input description here"> <br/>
         <input type="submit" value="Create Schedule">
     </form>
     <a href="/scheduler">
