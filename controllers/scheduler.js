@@ -21,6 +21,31 @@ router.get("/", (req, res) => {
     })
 })
 
+// new route
+router.get("/new", (req, res) => {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentHour = date.getHours()
+    let hourAboveCurrentHour = date.getHours() + 1;
+
+    if (month < 10) 
+        month = "0" + month;
+    
+    if (day < 10)
+        day = "0" + day
+    
+    const dateOfToday = year + "-" + month + "-" + day;
+
+    currentHour, hourAboveCurrentHour += ":00"
+
+    res.render("new.ejs", {
+        date: dateOfToday,
+        hour: currentHour,
+        aboveHour: hourAboveCurrentHour
+    })
+})
 
 // check all id's
 router.get("/checkID", (req, res) => {
@@ -58,6 +83,8 @@ router.get("/:id", (req, res) => {
     })
 })
 
+
+
 // delete
 router.delete("/:id", (req, res) => {
     Scheduler.findByIdAndDelete(req.params.id, (err, data) => {
@@ -68,6 +95,17 @@ router.delete("/:id", (req, res) => {
         }
     })
 })
+
+// delete all
+// router.delete("/", (req, res) => {
+//     Scheduler.deleteMany({}, (err, data) => {
+//         if (err) {
+//             console.log(err, "- ERROR AT DELETE ALL ROUTE")
+//         } else {
+//             res.redirect("/scheduler")
+//         }
+//     })
+// })
 
 
 module.exports = router;

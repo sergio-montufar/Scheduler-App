@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Schedule</title>
+</head>
+<body>
+    <h1>Add A New Event!</h1>
+    <form action="/scheduler" method="POST">
+        <label for="name">Name Of Event</label>
+        <input type="text" name="name"> <br/>
+        <label for="date">Choose a date</label>
+        <input type="date" name="date" value="<%=date%>"> <br/>
+        <label for="time">Choose First Time</label>
+        <input type="time" name="time" value="<%=hour%>"> <br/>
+        <label for="time">Choose Second Time</label>
+        <input type="time" name="time" value="<%=aboveHour%>"> <br/>
+        <input type="submit" value="Create Schedule">
+    </form>
+    <a href="/scheduler">
+        <button>Cancel</button>
+    </a>
+</body>
+</html>
