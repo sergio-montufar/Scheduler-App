@@ -40,12 +40,34 @@ router.get("/seed", (req, res) => {
             console.log(err, "- ERROR AT SEED ROUTE")
         } else {
             console.log("DATA SEEDED SUCCESSFULLY");
-            console.log(data)
             res.redirect("/scheduler");
         }
     })
 })
 
+// show route
+router.get("/:id", (req, res) => {
+    Scheduler.findById(req.params.id, (err, foundSchedule) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render("show.ejs", {
+                schedule: foundSchedule,
+            })
+        }
+    })
+})
+
+// delete
+router.delete("/:id", (req, res) => {
+    Scheduler.findByIdAndDelete(req.params.id, (err, data) => {
+        if (err) {
+            console.log(err, "- ERROR AT DELETE ROUTE")
+        } else {
+            res.redirect("/scheduler")
+        }
+    })
+})
 
 
 module.exports = router;

@@ -5,7 +5,7 @@ const schedulerSchema = new mongoose.Schema({
     date: {type: Date, min: Date.now(), max: "2030-12-31", required: true},
     time: {type: Date, required: true},
     color: String,
-    description: String,
+    description: String
 }, {timestamps: true})
 
 const Scheduler = mongoose.model("Scheduler", schedulerSchema)

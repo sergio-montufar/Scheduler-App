@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const schedulerController = require("./controllers/scheduler.js")
+const schedulerController = require("./controllers/scheduler.js");
+
 
 require("dotenv").config();
 

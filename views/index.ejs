@@ -9,8 +9,14 @@
 <body>
     <h3>Welcome to Scheduler! (name tbd)</h3>
     <% for (let i = 0; i < schedules.length; i++) { %>
-        <h4>Schedule: <% schedules[i].name %></h4>
-        <h3>Date Of Event: <% schedules[i].date %></h3>
+        <div class="container">
+            <h3>Schedule: 
+                <a href="/scheduler/<% schedules[i]._id %>">
+                    <% schedules[i].name %>
+                </a>
+            </h3>
+            <h4>Date Of Event: <% schedules[i].date %></h4>
+        </div> 
     <% } %>
 </body>
 </html>
