@@ -16,10 +16,6 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/scheduler", schedulerController);
 
-app.get("/", (req, res) => {
-    res.send("TIS BE WORKING!")
-})
-
 mongoose.connect(mongoDBURI);
 mongoose.connection.once("open", () => {
     console.log("this is connected to mongo!")

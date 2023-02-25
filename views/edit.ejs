@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Schedule</title>
 </head>
 <body>
-    
+    <h1>Edit Your Schedule</h1>
+    <form action="/scheduler/<%=schedule._id%>?_method=PUT" method="POST">
+        <label for="name">Name Of Event</label>
+        <input type="text" name="name" value="<%=schedule.name%>"> <br/>
+        <label for="date">Choose a date</label>
+        <input type="date" name="date" value="<%=schedule.date%>" min="2020-01-01" max="2030-12-31"> <br/>
+        <label for="time">Choose First Time</label>
+        <input type="time" name="first_time" value="<%=schedule.first_time%>"> <br/>
+        <label for="time">Choose Second Time</label>
+        <input type="time" name="second_time" value="<%=schedule.second_time%>" > <br/>
+        <label for="description">Add A Description</label>
+        <input type="text" name="description" placeholder="input description here" value="<%=schedule.description%>"> <br/>
+        <input type="submit" value="Edit Schedule">
+    </form>
+    <a href="/scheduler">
+        <button>Cancel</button>
+    </a>
 </body>
 </html>

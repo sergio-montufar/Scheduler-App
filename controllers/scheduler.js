@@ -37,7 +37,6 @@ router.get("/new", (req, res) => {
         day = "0" + day
     
     const dateOfToday = year + "-" + month + "-" + day;
-
     // currentHour, hourAboveCurrentHour += ":00"
 
     res.render("new.ejs", {
@@ -82,6 +81,20 @@ router.get("/:id", (req, res) => {
     })
 })
 
+// edit route
+router.get("/:id/edit", (req, res) => {
+    Scheduler.findById(req.params.id, (err, foundSchedule) => {
+        if (err) {
+            console.log(err, "- ERROR AT EDIT ROUTE")
+        } else {
+            console.log(foundSchedule);
+            res.render("edit.ejs", {
+                schedule: foundSchedule,
+            })
+        }
+    })
+})
+
 
 // post route 
 router.post("/", (req, res) => {
@@ -103,6 +116,18 @@ router.delete("/:id", (req, res) => {
             console.log(err, "- ERROR AT DELETE ROUTE")
         } else {
             res.redirect("/scheduler")
+        }
+    })
+})
+
+// put route
+
+router.put("/:id", (req, res) => {
+    Scheduler.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedSchedule) => {
+        if (err) {
+            console.log(err, "- ERROR AT PUT ROUTE")
+        } else {
+            res.redirect("/scheduler/" + req.params.id)
         }
     })
 })
