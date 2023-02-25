@@ -16,13 +16,13 @@ router.use(isAuthenticated);
 
 // index route
 router.get("/", (req, res) => {
-    Scheduler.find({username: req.session.currentUser.username}, (err, allSchedules) => {
+    Scheduler.find({username: req.sessionStore.currentUser.username}, (err, allSchedules) => {
         if (err) {
             console.log(err, "- ERROR FOUND AT INDEX ROUTE")
         } else {
             res.render("index.ejs", {
                 schedules: allSchedules,
-                currentUser: req.session.currentUser
+                currentUser: req.sessionStore.currentUser
             });
         }
     })
@@ -34,7 +34,6 @@ router.get("/new", (req, res) => {
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    let hour = date.getHours();
 
     if (month < 10) 
         month = "0" + month;
@@ -44,7 +43,7 @@ router.get("/new", (req, res) => {
     
     const dateOfToday = year + "-" + month + "-" + day;
 
-    console.log(hour)
+   
 
     res.render("new.ejs", {
         date: dateOfToday,

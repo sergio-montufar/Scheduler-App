@@ -13,7 +13,7 @@ const User = require("../models/users.js");
 
 sessions.get("/new", (req, res) => {
     res.render("sessions/new.ejs", {
-        currentUser: req.session.currentUser
+        currentUser: req.sessionStore.currentUser
     })
 })
 
@@ -26,7 +26,7 @@ sessions.post("/", (req, res) => {
             res.render("sessions/error.ejs")
         } else {
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-                req.session.currentUser = foundUser;
+                req.sessionStore.currentUser = foundUser;
                 res.redirect("/scheduler")
             } else {
                 res.render("sessions/error.ejs")
