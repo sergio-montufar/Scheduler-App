@@ -1,9 +1,9 @@
-const isAunthenticated = (req, res, next) => {
-    if (req.sessions.currentUser) {
+const isAuthenticated = (req, res, next) => {
+    if (req.session.currentUser) {
         return next();
     } else {
         res.redirect("/sessions/new")
     }
 }
 
-modules.exports = isAunthenticated;
+module.exports = isAuthenticated;

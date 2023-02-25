@@ -1,8 +1,14 @@
+/////////////////////////
+////// DEPENDENCIES /////
+/////////////////////////
+
 const express = require("express");
 const router = express.Router();
 const Scheduler = require("../models/scheduler.js");
 const schedulesSeed = require("../seedData/data.js");
+const isAuthenticated = require("../utils/middleware.js");
 
+router.use(isAuthenticated);
 
 //////////////////
 ///// ROUTES /////
@@ -16,6 +22,7 @@ router.get("/", (req, res) => {
         } else {
             res.render("index.ejs", {
                 schedules: allSchedules,
+                currentUser: req.sessionStore.currentUser
             });
         }
     })
@@ -27,8 +34,6 @@ router.get("/new", (req, res) => {
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    let currentHour = date.getHours()
-    let hourAboveCurrentHour = date.getHours() + 1;
 
     if (month < 10) 
         month = "0" + month;
@@ -37,11 +42,11 @@ router.get("/new", (req, res) => {
         day = "0" + day
     
     const dateOfToday = year + "-" + month + "-" + day;
-    // currentHour, hourAboveCurrentHour += ":00"
 
     res.render("new.ejs", {
         date: dateOfToday,
         hour: currentHour,
+        currentUser: req.sessionStore.currentUser
     })
 })
 
@@ -76,6 +81,7 @@ router.get("/:id", (req, res) => {
         } else {
             res.render("show.ejs", {
                 schedule: foundSchedule,
+                currentUser: req.sessionStore.currentUser
             })
         }
     })
@@ -90,6 +96,7 @@ router.get("/:id/edit", (req, res) => {
             console.log(foundSchedule);
             res.render("edit.ejs", {
                 schedule: foundSchedule,
+                currentUser: req.sessionStore.currentUser
             })
         }
     })

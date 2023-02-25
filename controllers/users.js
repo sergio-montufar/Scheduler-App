@@ -1,7 +1,15 @@
+/////////////////////////
+////// DEPENDENCIES /////
+/////////////////////////
+
 const express = require("express");
 const users = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/users.js");
+
+//////////////////
+///// ROUTES /////
+//////////////////
 
 users.get("/new", (req, res) => {
     res.render("users/new.ejs");
