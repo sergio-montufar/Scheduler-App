@@ -6,7 +6,8 @@ const schedulerSchema = new mongoose.Schema({
     first_time: {type: String, required: true},
     second_time: {type: String, required: true},
     // color: String,
-    description: String
+    description: String,
+    username: String
 })
 
 const Scheduler = mongoose.model("Scheduler", schedulerSchema)

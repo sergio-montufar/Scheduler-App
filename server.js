@@ -37,11 +37,11 @@ app.get("/", (req, res) => {
     res.redirect("/scheduler")
 })
 
-mongoose.connect(mongoDBURI);
+mongoose.connect(mongoDBURI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.once("open", () => {
     console.log("this is connected to mongo!")
 })
 
 app.listen(PORT, () => {
-    console.log("This is listening!")
+    console.log("This is listening on port: " + PORT)
 })

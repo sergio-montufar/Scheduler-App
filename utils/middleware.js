@@ -1,5 +1,5 @@
 const isAuthenticated = (req, res, next) => {
-    if (req.sessionStore.currentUser) {
+    if (req.session.currentUser) {
         return next();
     } else {
         res.redirect("/sessions/new")

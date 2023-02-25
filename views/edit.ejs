@@ -17,6 +17,9 @@
         <input type="time" name="second_time" value="<%=schedule.second_time%>" > <br/>
         <label for="description">Add A Description</label>
         <input type="text" name="description" placeholder="input description here" value="<%=schedule.description%>"> <br/>
+        <!-- Shoutout To Vi For This Idea -->
+        <label for="username"></label>
+        <input type="hidden" name="username" value="<%=currentUser.username%>">
         <input type="submit" value="Edit Schedule">
     </form>
     <a href="/scheduler">

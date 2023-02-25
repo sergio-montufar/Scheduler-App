@@ -16,13 +16,14 @@ router.use(isAuthenticated);
 
 // index route
 router.get("/", (req, res) => {
-    Scheduler.find({username: req.sessionStore.currentUser.username}, (err, allSchedules) => {
+    Scheduler.find({username: req.session.currentUser.username}, (err, allSchedules) => {
         if (err) {
             console.log(err, "- ERROR FOUND AT INDEX ROUTE")
         } else {
+            console.log(allSchedules)
             res.render("index.ejs", {
                 schedules: allSchedules,
-                currentUser: req.sessionStore.currentUser
+                currentUser: req.session.currentUser
             });
         }
     })
@@ -43,11 +44,9 @@ router.get("/new", (req, res) => {
     
     const dateOfToday = year + "-" + month + "-" + day;
 
-   
-
     res.render("new.ejs", {
         date: dateOfToday,
-        currentUser: req.sessionStore.currentUser
+        currentUser: req.session.currentUser
     })
 })
 
@@ -82,7 +81,7 @@ router.get("/:id", (req, res) => {
         } else {
             res.render("show.ejs", {
                 schedule: foundSchedule,
-                currentUser: req.sessionStore.currentUser
+                currentUser: req.session.currentUser
             })
         }
     })
@@ -97,7 +96,7 @@ router.get("/:id/edit", (req, res) => {
             console.log(foundSchedule);
             res.render("edit.ejs", {
                 schedule: foundSchedule,
-                currentUser: req.sessionStore.currentUser
+                currentUser: req.session.currentUser
             })
         }
     })
@@ -106,6 +105,7 @@ router.get("/:id/edit", (req, res) => {
 
 // post route 
 router.post("/", (req, res) => {
+    console.log(req.body)
     Scheduler.create(req.body, (err, createdSchedule) => {
         if (err) {
             console.log(err, "- ERROR AT POST ROUTE")
@@ -129,7 +129,6 @@ router.delete("/:id", (req, res) => {
 })
 
 // put route
-
 router.put("/:id", (req, res) => {
     Scheduler.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedSchedule) => {
         if (err) {
