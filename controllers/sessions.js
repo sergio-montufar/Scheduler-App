@@ -4,7 +4,6 @@
 
 const bcrypt = require("bcrypt");
 const express = require("express");
-const session = require("express-session");
 const sessions = express.Router();
 const User = require("../models/users.js");
 
@@ -22,15 +21,15 @@ sessions.post("/", (req, res) => {
     User.findOne({username: req.body.username}, (err, foundUser) => {
         if (err) {
             console.log(err);
-            res.send("Sorry, username and password not found.")
+            res.render("sessions/error.ejs")
         } else if (!foundUser) {
-            res.send("Sorry, username and password not found.")
+            res.render("sessions/error.ejs")
         } else {
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser;
                 res.redirect("/scheduler")
             } else {
-                res.send("Sorry, username and password not found.")
+                res.render("sessions/error.ejs")
             }
         }
     })

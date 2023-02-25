@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include("../partials/head.ejs") %>
+    <title>Login Page</title>
 </head>
 <body>
-    
+    <h1>Welcome to Planificate!</h1>
+    <h3>Login To Use Website</h3>
+
+    <form action="/sessions/" method="POST">
+        <label for="username">Username: </label>
+        <input type="text" name="username"> 
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <input type="submit" value="Login">
+    </form>
+
+    <label>Haven't made an account yet? Create one here:</label>
+    <a href="/users/new">
+        <button>Create An Account</button>
+    </a>
 </body>
 </html>

@@ -20,9 +20,10 @@ users.post("/", (req, res) => {
     User.create(req.body, (err, createdUser) => {
         if (err) {
             console.log(err, "- ERROR TRYING TO CREATE USER")
+            res.render("users/error.ejs")
         } else {
             console.log("user is created: " + createdUser);
-            res.redirect("/")
+            res.redirect("/sessions/new")
         }
     })
 })

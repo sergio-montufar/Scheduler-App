@@ -1,0 +1,16 @@
+<% if (currentUser) { %>
+    <% capitalized = currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>
+Hello <%=capitalized%>
+<nav id="logout">
+    <form action="/sessions?_method=DELETE" method="POST">
+    <input type="submit" value="Log Out">
+    </form>
+</nav>
+    
+
+<% } else { %>
+    <ul>
+        <li><a href="/users/new">Sign Up</a></li>
+        <li><a href="/sessions/new">Log In</a></li>
+    </ul>
+<% } %>
