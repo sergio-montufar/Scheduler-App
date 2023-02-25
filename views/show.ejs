@@ -14,7 +14,12 @@
     </nav>
     <div>
         <h4>The Event is on: <%= schedule.date%></h4>
-        <h4>It starts at: <%= schedule.first_time %> and ends at: <%= schedule.second_time %></h4>
+        <% if (schedule.all_day === "on") { %>
+            <h4>It lasts all day!</h4>
+        <% } else { %>
+            <h4>It starts at <%= schedule.first_time %> and ends at <%= schedule.second_time %></h4>
+        <% } %>
+
         <% if (schedule.description) %>
             <h4>
                 Description: <%= schedule.description %>

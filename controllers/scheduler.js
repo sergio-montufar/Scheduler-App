@@ -35,17 +35,30 @@ router.get("/new", (req, res) => {
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
+    let hour = date.getHours();
+    let hourPlusOne = hour + 1;
 
     if (month < 10) 
         month = "0" + month;
     
     if (day < 10)
         day = "0" + day
+
+    if (hour < 10) 
+        hour = "0" + hour;
+
+    if (hourPlusOne < 10)
+        hourPlusOne = "0" + hourPlusOne
     
+
     const dateOfToday = year + "-" + month + "-" + day;
+    const currentHour = hour + ":00"
+    const hourAbove = hourPlusOne + ":00"
 
     res.render("new.ejs", {
         date: dateOfToday,
+        hour1: currentHour,
+        hour2: hourAbove,
         currentUser: req.session.currentUser
     })
 })
@@ -105,6 +118,11 @@ router.get("/:id/edit", (req, res) => {
 
 // post route 
 router.post("/", (req, res) => {
+    if (req.body.all_day === "on") {
+        req.body.all_day = true
+    } else {
+        req.body.all_day = false
+    }
     console.log(req.body)
     Scheduler.create(req.body, (err, createdSchedule) => {
         if (err) {
@@ -130,6 +148,12 @@ router.delete("/:id", (req, res) => {
 
 // put route
 router.put("/:id", (req, res) => {
+    console.log(req.body)
+    if (req.body.all_day === "on") {
+        req.body.all_day = true
+    } else {
+        req.body.all_day = false
+    }
     Scheduler.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedSchedule) => {
         if (err) {
             console.log(err, "- ERROR AT PUT ROUTE")
